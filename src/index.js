@@ -9,7 +9,7 @@ const appElement = document.getElementById('app')
 
 ReactDOM.render(
   <AppContainer>
-    <Voting pair={pair} />
+    <Voting pair={pair} hasVoted="sublime" />
   </AppContainer>,
   appElement
 )
@@ -19,7 +19,7 @@ if (module.hot) {
     const NextVoting = require('./components/Voting').default
     ReactDOM.render(
       <AppContainer>
-         <NextVoting pair={pair} />
+         <NextVoting pair={pair} hasVoted="sublime" />
       </AppContainer>,
       appElement
     )
