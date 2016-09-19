@@ -1,27 +1,32 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render, unmountComponentAtNode } from 'react-dom';
 import { AppContainer } from 'react-hot-loader'
+import { Router, Route, hashHistory } from 'react-router';
+import App from './components/App';
 import Voting from './components/Voting'
 
 const pair = ['sublime', 'emacs']
 
 const appElement = document.getElementById('app')
+const renderApp = () => {
+  const routes = <Route component={App}>
+    <Route path="/" component={Voting} />
+  </Route>;
 
-ReactDOM.render(
-  <AppContainer>
-    <Voting pair={pair} hasVoted="sublime" />
-  </AppContainer>,
-  appElement
-)
+  render(
+    <AppContainer>
+      <Router history={hashHistory}>{routes}</Router>
+    </AppContainer>,
+    appElement
+  )
+}
+
+renderApp()
 
 if (module.hot) {
-  module.hot.accept('./components/Voting', () => {
-    const NextVoting = require('./components/Voting').default
-    ReactDOM.render(
-      <AppContainer>
-         <NextVoting pair={pair} hasVoted="sublime" />
-      </AppContainer>,
-      appElement
-    )
-  })
+  module.hot.accept('./components/App', () => {
+    // Prevent the hot reloading error from react-router
+    unmountComponentAtNode(appElement);
+    renderApp();
+  });
 }
