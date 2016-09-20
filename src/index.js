@@ -13,15 +13,15 @@ import Results from './components/Results'
 import remoteActionMiddleware from './remote-action-middleware'
 
 
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware
-)(createStore)
-const store = createStoreWithMiddleware(reducer)
-
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
 socket.on('state', state =>
   store.dispatch(setState(state))
 )
+
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware(socket)
+)(createStore)
+const store = createStoreWithMiddleware(reducer)
 
 const appElement = document.getElementById('app')
 const renderApp = () => {
