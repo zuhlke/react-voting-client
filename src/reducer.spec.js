@@ -78,4 +78,31 @@ describe('reducer', () => {
     })
   })
 
+  it('removes hasVoted on SET_STATE if pair changes', () => {
+    const initialState = {
+      vote: {
+        pair: ['sublime', 'emacs'],
+        tally: {sublime: 1}
+      },
+      hasVoted: 'sublime'
+    }
+    const action = {
+      type: 'SET_STATE',
+      payload: {
+        state: {
+          vote: {
+            pair: ['vim', 'TextMate']
+          }
+        }
+      }
+    }
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.deep.equal({
+      vote: {
+        pair: ['vim', 'TextMate']
+      }
+    })
+  })
+
 })
