@@ -3,6 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Router, Route, hashHistory } from 'react-router'
 import {createStore} from 'redux'
+import {Provider} from 'react-redux'
 import reducer from './reducer'
 import App from './components/App'
 import Voting from './components/Voting'
@@ -30,7 +31,9 @@ const renderApp = () => {
 
   render(
     <AppContainer>
-      <Router history={hashHistory}>{routes}</Router>
+      <Provider store={store}>
+        <Router history={hashHistory}>{routes}</Router>
+      </Provider>
     </AppContainer>,
     appElement
   )
