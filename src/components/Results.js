@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Winner from './Winner'
 
-export default class Results extends Component {
+export class Results extends Component {
   getPair() {
     return this.props.pair || []
   }
@@ -36,3 +37,15 @@ export default class Results extends Component {
       </div>
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    pair: state.vote && state.vote.pair,
+    tally: state.vote && state.vote.tally,
+    winner: state.winner
+  }
+}
+
+const ResultsContainer = connect(mapStateToProps)(Results)
+
+export default ResultsContainer 

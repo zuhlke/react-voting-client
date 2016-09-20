@@ -5,7 +5,7 @@ import {
   scryRenderedDOMComponentsWithClass,
   Simulate
 } from 'react-addons-test-utils'
-import Results from '../../src/components/Results'
+import {Results} from './Results'
 import {expect} from 'chai'
 
 describe('Results', () => {
