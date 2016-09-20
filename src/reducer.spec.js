@@ -41,4 +41,41 @@ describe('reducer', () => {
     })
   })
 
+  it('handles VOTE by setting hasVoted', () => {
+    const state = {
+      vote: {
+        pair: ['sublime', 'emacs'],
+        tally: {sublime: 1}
+      }
+    }
+    const action = {type: 'VOTE', payload: {entry: 'sublime'}}
+    const nextState = reducer(state, action)
+
+    expect(nextState).to.deep.equal({
+      vote: {
+        pair: ['sublime', 'emacs'],
+        tally: {sublime: 1}
+      },
+      hasVoted: 'sublime'
+    })
+  })
+
+  it('does not set hasVoted for VOTE on invalid entry', () => {
+    const state = {
+      vote: {
+        pair: ['sublime', 'emacs'],
+        tally: {sublime: 1}
+      }
+    }
+    const action = {type: 'VOTE', payload: {entry: 'vim'}}
+    const nextState = reducer(state, action)
+
+    expect(nextState).to.deep.equal({
+      vote: {
+        pair: ['sublime', 'emacs'],
+        tally: {sublime: 1}
+      }
+    })
+  })
+
 })
