@@ -15,7 +15,7 @@ const vote = (state, entry) => {
 
 const resetVote = (state) => {
   const currentPair = (state.vote && state.vote.pair) || []
-  if (state.hasVoted && !currentPair.indexOf(state.hasVoted) > -1) {
+  if (state.hasVoted && currentPair.indexOf(state.hasVoted) === -1) {
     let newState = {...state}
     delete newState.hasVoted
     return newState
