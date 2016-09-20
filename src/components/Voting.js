@@ -16,6 +16,7 @@ export class Voting extends Component {
 
 const mapStateToProps = (state) => ({
   pair: state.vote && state.vote.pair,
+  hasVoted: state.hasVoted,
   winner: state.winner
 })
 
