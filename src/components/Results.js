@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Winner from './Winner'
+import * as actionCreators from '../action-creators'
 
 export class Results extends Component {
   getPair() {
@@ -44,6 +45,9 @@ const mapStateToProps = (state) => ({
   winner: state.winner
 })
 
-const ResultsContainer = connect(mapStateToProps)(Results)
+const ResultsContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(Results)
 
 export default ResultsContainer 
