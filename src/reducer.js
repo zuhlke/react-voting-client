@@ -9,16 +9,27 @@ const vote = (state, entry) => {
       hasVoted: entry
     }
   } else {
-    return state;
+    return state
+  }
+}
+
+const resetVote = (state) => {
+  const currentPair = (state.vote && state.vote.pair) || []
+  if (state.hasVoted && !currentPair.indexOf(state.hasVoted) > -1) {
+    let newState = {...state}
+    delete newState.hasVoted
+    return newState
+  } else {
+    return state
   }
 }
 
 const reducer = (state = {}, {type, payload}) => {
   switch (type) {
     case 'SET_STATE':
-      return setState(state, payload.state)
+      return resetVote(setState(state, payload.state))
     case 'VOTE':
-      return vote(state, payload.entry);
+      return vote(state, payload.entry)
   }
   return state
 }
