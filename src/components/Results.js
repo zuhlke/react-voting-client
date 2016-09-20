@@ -38,13 +38,11 @@ export class Results extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pair: state.vote && state.vote.pair,
-    tally: state.vote && state.vote.tally,
-    winner: state.winner
-  }
-}
+const mapStateToProps = (state) => ({
+  pair: state.vote && state.vote.pair,
+  tally: state.vote && state.vote.tally,
+  winner: state.winner
+})
 
 const ResultsContainer = connect(mapStateToProps)(Results)
 
